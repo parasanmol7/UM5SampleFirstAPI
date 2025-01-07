@@ -1,17 +1,18 @@
 package com.firstSpringApi.UM5SampleFirstAPI.controller;
 
-import com.firstSpringApi.UM5SampleFirstAPI.UM.Customer;
+import com.firstSpringApi.UM5SampleFirstAPI.model.Customer;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customerdetails")
-public class CustomerAPIService
+public class CustomerController
 {
     Customer customer;
 
-    @GetMapping("{customerId}")
-    public Customer getCustomerDetails(String customerId)
+    @GetMapping("/{customerId}")
+    public Customer getCustomerDetails(@PathVariable String customerId)
     {
+        System.out.println("customer id is:"+customerId);
    //     return new Customer("C1","Anm",
    //             "Par","BC");
         return customer;
@@ -19,7 +20,10 @@ public class CustomerAPIService
     @PostMapping
     public String addCustomer(@RequestBody Customer customer)
     {
-        this.customer = customer;
+
+
+        String city = "sangrur";
+        System.out.println("this is my customer"+this.customer.toString());
         return "Customer Added Successfully";
     }
 
@@ -30,8 +34,8 @@ public class CustomerAPIService
         return "Customer updated Successfully";
     }
 
-    @DeleteMapping ("{customerId}")
-    public String deleteCustomer(String customerId)
+    @DeleteMapping ("/{customerId}")
+    public String deleteCustomer(@PathVariable String customerId)
     {
         this.customer = null;
         return "Customer Deleted Successfully";
